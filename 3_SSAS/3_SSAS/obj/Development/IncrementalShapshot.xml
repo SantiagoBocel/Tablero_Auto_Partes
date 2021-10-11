@@ -33,35 +33,35 @@
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>Zy59LBnsWVVBSzhuoDSd+uDS9Ug=10/10/2021 6:36:09 PM10/10/2021 6:32:55 PM</TimeStamp>
-        <ID>
-          <String>Partes</String>
-        </ID>
-      </ObjectSnapshot>
-      <ObjectSnapshot>
-        <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>PuD4ZzHuVLdbu9CyB3oxPAWEvEA=10/10/2021 6:38:43 PM10/10/2021 6:32:55 PM</TimeStamp>
-        <ID>
-          <String>Geografia</String>
-        </ID>
-      </ObjectSnapshot>
-      <ObjectSnapshot>
-        <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>ZHyDvsRzbSYzLkJzDxCU00XXX6Q=10/10/2021 6:36:09 PM10/10/2021 6:32:55 PM</TimeStamp>
-        <ID>
-          <String>Clientes</String>
-        </ID>
-      </ObjectSnapshot>
-      <ObjectSnapshot>
-        <Type>Microsoft.AnalysisServices.Dimension</Type>
         <TimeStamp>1I78hAnhkb6YaVl9VM+eeGfnSwY=10/10/2021 6:37:46 PM10/10/2021 6:32:55 PM</TimeStamp>
         <ID>
           <String>Fecha</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>EjspRQybLw+d114EHIdplyVn5dM=10/10/2021 7:07:39 PM10/10/2021 7:07:39 PM</TimeStamp>
+        <ID>
+          <String>Clientes</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>YRSraiC9AairPX91do2H+j+n/qI=10/10/2021 7:08:34 PM10/10/2021 7:08:34 PM</TimeStamp>
+        <ID>
+          <String>Partes</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>c3Ny9Ovc+O5yGkqqWkGVRPmvm8U=10/10/2021 7:19:31 PM10/10/2021 7:16:42 PM</TimeStamp>
+        <ID>
+          <String>Geografia</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>TQC+VNQP9vD4roVEusx1CWkySp4=10/10/2021 6:41:35 PM10/10/2021 6:32:55 PMvNDJNkQWkrtAriVtxCSnzXyVPHI=10/10/2021 6:32:56 PM10/10/2021 6:32:55 PM</TimeStamp>
+        <TimeStamp>+YWXPWmckFOHv5hMciEorCtSNrI=10/10/2021 7:07:05 PM10/10/2021 6:32:55 PMvNDJNkQWkrtAriVtxCSnzXyVPHI=10/10/2021 6:32:56 PM10/10/2021 6:32:55 PM</TimeStamp>
         <ID>
           <String>Repuestos Web DWH</String>
         </ID>
@@ -77,6 +77,6 @@
     <Granularity>Coarse</Granularity>
   </Snapshot>
   <AssemblyLocations />
-  <ProcessingComplete>false</ProcessingComplete>
-  <LastDeployed>2021-10-11T00:41:50.893333Z</LastDeployed>
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2021-10-11T01:21:20.93Z</LastDeployed>
 </DeploymentSnapshot>

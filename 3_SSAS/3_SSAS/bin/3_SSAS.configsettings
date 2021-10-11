@@ -13,16 +13,16 @@
     </DataSources>
     <Dimensions>
       <Dimension>
-        <ID>Partes</ID>
-      </Dimension>
-      <Dimension>
-        <ID>Geografia</ID>
+        <ID>Fecha</ID>
       </Dimension>
       <Dimension>
         <ID>Clientes</ID>
       </Dimension>
       <Dimension>
-        <ID>Fecha</ID>
+        <ID>Partes</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Geografia</ID>
       </Dimension>
     </Dimensions>
     <Cubes>

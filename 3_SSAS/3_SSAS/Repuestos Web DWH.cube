@@ -8,7 +8,7 @@
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
       <Value>
         <dds xmlns="">
-          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="10" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-200" scrolltop="-1332" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="30136" y="21378" backcolor="2434342" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="10" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-200" scrolltop="1253" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="30136" y="21378" backcolor="2434342" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
             <font>
               <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
             </font>
@@ -171,7 +171,7 @@
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
-      <Value>-1332</Value>
+      <Value>1253</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
@@ -189,68 +189,6 @@
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
   <State>Unprocessed</State>
   <Dimensions>
-    <Dimension dwd:design-time-name="df1b0891-c2de-4166-b108-36c1585dad99">
-      <ID>Partes</ID>
-      <Name>Partes</Name>
-      <DimensionID>Partes</DimensionID>
-      <Attributes>
-        <Attribute dwd:design-time-name="6e0254a7-5ee3-4277-a217-fb435faea81c">
-          <AttributeID>SK Partes</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="d1d90091-2b3f-4b78-b593-52e0cd6f159c">
-          <AttributeID>Nombre Categoria</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="9dbb309d-ef54-4c39-a88e-1dbc69ee7f37">
-          <AttributeID>Nombre Linea</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="76f6779d-0333-4f1b-8234-9646a4bf2e2e">
-          <AttributeID>Nombre Parte</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="7484c18f-97b2-4d11-99bf-d1d42b52440c">
-          <AttributeID>Precio Parte</AttributeID>
-        </Attribute>
-      </Attributes>
-    </Dimension>
-    <Dimension dwd:design-time-name="8e32fe13-dc1b-4c49-957c-bedcc0c37e97">
-      <ID>Geografia</ID>
-      <Name>Geografia</Name>
-      <DimensionID>Geografia</DimensionID>
-      <Attributes>
-        <Attribute dwd:design-time-name="78c1aa0b-174f-49a1-8b55-0a05377ed045">
-          <AttributeID>SK Geografia</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="dedd88f5-81f2-4c2b-9add-c63ec0ead67e">
-          <AttributeID>Nombre Ciudad</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="e9e7d7c9-947f-4a8f-9c7e-d1a9870cdce4">
-          <AttributeID>Nombre Pais</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="9332a1a8-514b-4211-ae94-08594cba964e">
-          <AttributeID>Nombre Region</AttributeID>
-        </Attribute>
-      </Attributes>
-      <Hierarchies>
-        <Hierarchy dwd:design-time-name="e4418f43-c1ae-45ec-8c1f-e074ab8c55b3">
-          <HierarchyID>Hierarchy</HierarchyID>
-        </Hierarchy>
-      </Hierarchies>
-    </Dimension>
-    <Dimension dwd:design-time-name="8095e87c-9ea9-4172-babc-5a9b239f02bc">
-      <ID>Clientes</ID>
-      <Name>Clientes</Name>
-      <DimensionID>Clientes</DimensionID>
-      <Attributes>
-        <Attribute dwd:design-time-name="b12d9f3c-7050-4b17-aeba-21490f39f9df">
-          <AttributeID>SK Clientes</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="cebfc62a-24fe-4294-9385-0421e5759838">
-          <AttributeID>Genero</AttributeID>
-        </Attribute>
-        <Attribute dwd:design-time-name="4150efc1-b381-432a-85bc-293ff7b60e01">
-          <AttributeID>Fecha Nacimiento</AttributeID>
-        </Attribute>
-      </Attributes>
-    </Dimension>
     <Dimension dwd:design-time-name="55d2e42f-2d45-4c59-88f3-f2f94745acab">
       <ID>Fecha</ID>
       <Name>Fecha</Name>
@@ -388,63 +326,6 @@
       <StorageMode>Molap</StorageMode>
       <ProcessingMode>Regular</ProcessingMode>
       <Dimensions>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="a2997df6-0229-4804-8fee-27a74ae36b33">
-          <CubeDimensionID>Partes</CubeDimensionID>
-          <Attributes>
-            <Attribute dwd:design-time-name="3c8110fc-8430-421e-99ba-bb8430e4a5cb">
-              <AttributeID>SK Partes</AttributeID>
-              <KeyColumns>
-                <KeyColumn dwd:design-time-name="778d935e-a642-4073-b2b6-e5b4cc2f2248">
-                  <DataType>Integer</DataType>
-                  <NullProcessing>UnknownMember</NullProcessing>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="0eb1908f-0ba4-4219-9317-b57b297ef6ca">
-                    <TableID>Fact_Orden</TableID>
-                    <ColumnID>SK_Partes</ColumnID>
-                  </Source>
-                </KeyColumn>
-              </KeyColumns>
-              <Type>Granularity</Type>
-            </Attribute>
-          </Attributes>
-        </Dimension>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="9539a808-7b23-42d1-a4f4-f5d5b1cb18c6">
-          <CubeDimensionID>Geografia</CubeDimensionID>
-          <Attributes>
-            <Attribute dwd:design-time-name="d95e5994-a22c-4098-8d88-95d8b841405d">
-              <AttributeID>SK Geografia</AttributeID>
-              <KeyColumns>
-                <KeyColumn dwd:design-time-name="01b0af29-b2c5-4b5a-bad3-d3cc08859273">
-                  <DataType>Integer</DataType>
-                  <NullProcessing>UnknownMember</NullProcessing>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="6e377f0b-07f8-4094-a93a-359c5cbd47a2">
-                    <TableID>Fact_Orden</TableID>
-                    <ColumnID>SK_Geografia</ColumnID>
-                  </Source>
-                </KeyColumn>
-              </KeyColumns>
-              <Type>Granularity</Type>
-            </Attribute>
-          </Attributes>
-        </Dimension>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="4243d935-98ea-46dc-8b5e-a475a885c411">
-          <CubeDimensionID>Clientes</CubeDimensionID>
-          <Attributes>
-            <Attribute dwd:design-time-name="a5163558-e31c-4610-b486-5bb63d73dd7e">
-              <AttributeID>SK Clientes</AttributeID>
-              <KeyColumns>
-                <KeyColumn dwd:design-time-name="2edbafe7-1033-480c-8870-a514973ded6f">
-                  <DataType>Integer</DataType>
-                  <NullProcessing>UnknownMember</NullProcessing>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="486f7b20-b242-4cd4-bf82-52ec43451b75">
-                    <TableID>Fact_Orden</TableID>
-                    <ColumnID>SK_Clientes</ColumnID>
-                  </Source>
-                </KeyColumn>
-              </KeyColumns>
-              <Type>Granularity</Type>
-            </Attribute>
-          </Attributes>
-        </Dimension>
         <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="7084a906-b610-4465-b386-439c2ce1876f">
           <CubeDimensionID>Fecha</CubeDimensionID>
           <Attributes>

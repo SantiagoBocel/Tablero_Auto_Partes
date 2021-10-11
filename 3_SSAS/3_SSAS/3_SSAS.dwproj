@@ -20,20 +20,20 @@
   </Cubes>
   <Dimensions>
     <ProjectItem>
-      <Name>Partes.dim</Name>
-      <FullPath>Partes.dim</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Geografia.dim</Name>
-      <FullPath>Geografia.dim</FullPath>
+      <Name>Fecha.dim</Name>
+      <FullPath>Fecha.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Clientes.dim</Name>
       <FullPath>Clientes.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Fecha.dim</Name>
-      <FullPath>Fecha.dim</FullPath>
+      <Name>Partes.dim</Name>
+      <FullPath>Partes.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Geografia.dim</Name>
+      <FullPath>Geografia.dim</FullPath>
     </ProjectItem>
   </Dimensions>
   <DataSources>
