@@ -58,22 +58,58 @@ from dbo.StatusOrden SO
 use RepuestosWeb
 go
 select 
-	O.ID_Orden,
-	C.ID_Cliente,
-	O.ID_Ciudad,
-	O.ID_StatusOrden,
-	O.Total_Orden,
-	O.Fecha_Orden,
-	O.Fecha_Modificacion,
-	DO.ID_DetalleOrden,
-	DO.ID_Partes,
-	DO.Cantidad,
-	D.ID_Descuento,
-	D.NombreDescuento,
-	D.PorcentajeDescuento,
-	S.NombreStatus
+	O.ID_Orden ,
+	DO.ID_DetalleOrden ,
+	Co.IDCotizacion As ID_Cotizacion,
+	NumLinea ,
+	Total_Orden ,
+	Cantidad ,
+	NombreStatus ,
+	Fecha_Orden ,
+	Fecha_Modificacion ,
+	status_cotizacion  ,
+	TipoDocumento   ,
+	FechaCreacion  ,
+	FechaModificacion  ,
+	ProcesadoPor   ,
+	AseguradoraSubsidiaria  ,
+	NumeroReclamo   ,
+	OrdenRealizada   ,
+	CotizacionRealizada   ,
+	CotizacionDuplicada   ,
+	procurementFolderID   ,
+	DireccionEntrega1   ,
+	DireccionEntrega2   ,
+	MarcadoEntrega   ,
+	CodigoPostal  ,
+	LeidoPorPlantaReparacion    ,
+	LeidoPorPlantaReparacionFecha   ,
+	CotizacionReabierta     ,
+	EsAseguradora     ,
+	CodigoVerificacion   ,
+	FechaCreacionRegistro   ,
+	PartnerConfirmado     ,
+	WrittenBy   ,
+	SeguroValidado      ,
+	FechaCaptura   ,
+	Ruta  ,
+	FechaLimiteRuta   ,
+	TelefonoEntrega ,
+	OETipoParte ,
+	AltPartNum   ,
+	AltTipoParte   ,
+	ciecaTipoParte   ,
+	partDescripcion  ,
+	PrecioListaOnRO ,
+	PrecioNetoOnRO ,
+	NecesitadoParaFecha
 from dbo.Orden O
 inner join dbo.Detalle_orden DO on (O.ID_Orden=DO.ID_Orden)
+inner join dbo.Cotizacion Co on (O.ID_Orden = Co.IDOrden )
+inner join dbo.CotizacionDetalle Cod on (Co.IDCotizacion = Cod.IDCotizacion)
+inner join dbo.Aseguradoras A on (Co.IDAseguradora = A.IDAseguradora)
+inner join dbo.PlantaReparacion PR on (Co.IDPlantaReparacion = PR.IDPlantaReparacion)
+inner join dbo.Vehiculo V on(Cod.VehiculoID = V.VehiculoID)
 inner join dbo.Descuento D on (DO.ID_Descuento=D.ID_Descuento)
 inner join dbo.StatusOrden S on (O.ID_StatusOrden=S.ID_StatusOrden)
 inner join dbo.Clientes C on (O.ID_Cliente = C.ID_Cliente)
@@ -81,6 +117,7 @@ where ((Fecha_Orden>?) or (Fecha_Modificacion>?))
 --query para determinar la fecha maxima
 SELECT ISNULL(MAX(FechaEjecucion),'1900-01-01') AS UltimaFecha
 FROM FactLog
+
 ---query para el procedimiento
 use RepuestosWebDWH
 go
