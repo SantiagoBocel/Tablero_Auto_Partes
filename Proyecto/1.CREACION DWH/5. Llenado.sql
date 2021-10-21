@@ -41,16 +41,63 @@ from dbo.Clientes C
 -----------query para llenar la dimension StatusOrden
 select 
 	SO.ID_StatusOrden,
-	SO.NombreStatus
-from dbo.StatusOrden SO
+	SO.NombreStatus,
+from dbo.[StatusOrden] SO
 -----------query para llenar la dimension Aseguradoras
-
+select 
+	A.[SK_Aseguradoras],
+	A.[ID_Aseguradora],
+	A.[NombreAseguradora],
+	A.[RowCreatedDate],
+	A.[Activa]
+from dbo.[Aseguradoras] A
 -----------query para llenar la dimension PlantaReparacion
-
+select 
+	PR.[SK_PlantaReparacion],
+	PR.[ID_PlantaReparacion],
+	PR.[CompanyNombre],
+	PR.[Direccion],
+	PR.[Direccion2],
+	PR.[Ciudad],
+	PR.[Estado],
+	PR.[CodigoPostal],
+	PR.[Pais],
+	PR.[TelefonoAlmacen],
+	PR.[FaxAlmacen],
+	PR.[CorreoContacto],
+	PR.[NombreContacto],
+	PR.[TelefonoContacto],
+	PR.[TituloTrabajo],
+	PR.[AlmacenKeystone],
+	PR.[IDPredio],
+	PR.[LocalizadorCotizacion],
+	PR.[FechaAgregado],
+	PR.[IDEmpresa],
+	PR.[ValidacionSeguro],
+	PR.[Activo],
+	PR.[CreadoPor],
+	PR.[ActualizadoPor],
+	PR.[UltimaFechaActualizacion]
+from dbo.[PlantaReparacion] PR
 -----------query para llenar la dimension Vehiculo
-
+select 
+	V.[SK_Vehiculo],
+	V.[VehiculoID],
+	V.[VIN_Patron],
+	V.[Anio],
+	V.[Marca],
+	V.[Modelo],
+	V.[SubModelo],
+	V.[Estilo],
+	V.[FechaCreacion]
+from dbo.Vehiculo V
 -----------query para llenar la dimension Descuento
-
+select 
+	D.[SK_Descuento],
+	D.[ID_Descuento],
+	D.[NombreDescuento],
+	[PorcentajeDescuento]
+from dbo.Descuento D
 
 
 
