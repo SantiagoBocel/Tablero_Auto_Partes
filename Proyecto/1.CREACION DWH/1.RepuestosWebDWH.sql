@@ -191,7 +191,7 @@ exec sys.sp_addextendedproperty
     @level0type = N'SCHEMA', 
     @level0name = N'Dimension', 
     @level1type = N'TABLE', 
-    @level1name = N'Aseguradora';
+    @level1name = N'Aseguradoras';
 go
 
 exec sys.sp_addextendedproperty 
@@ -245,55 +245,155 @@ go
 -------------------------------------------------------------------------------------------------------
 --Tabla Fact
 alter table Fact.Orden add ID_Orden [UDT_PK]
-alter table Fact.Orden add ID_Descuento [UDT_PK]
 alter table Fact.Orden add ID_DetalleOrden [UDT_PK]
-alter table Fact.Orden add ID_Aseguradora [UDT_PK]
-alter table Fact.Orden add ID_PlantaReparacion [UDT_PK]
-alter table Fact.Orden add ID_Partner [UDT_PK]
-alter table Fact.Orden add ID_ClientePlantaReparacion [UDT_PK]
-alter table Fact.Orden add ID_Recotizacion [UDT_PK]
-alter table Fact.Orden add ID_Parte [UDT_PK]
-alter table Fact.Orden add NumLinea [UDT_PK]
-alter table Fact.Orden add NombreDescuento [UDT_VarcharMediano]
-alter table Fact.Orden add PorcentajeDescuento  [UDT_Decimal2.2]
+alter table Fact.Orden add ID_Cotizacion [UDT_PK]
+alter table Fact.Orden add NumLinea [UDT_VarcharMediano]
 alter table Fact.Orden add Total_Orden [UDT_Decimal12.2]
 alter table Fact.Orden add Cantidad [UDT_INT]---duda si es necesario para los ints o solo se pone int
 alter table Fact.Orden add NombreStatus [UDT_VarcharCorto]
 alter table Fact.Orden add Fecha_Orden [UDT_DateTime]
 alter table Fact.Orden add Fecha_Modificacion [UDT_DateTime]
-alter table Fact.Orden add status_cotizacion  [UDT_VarcherMediano]
-alter table Fact.Orden add TipoDocumento   [UDT_VarcherMediano]
+alter table Fact.Orden add status_cotizacion  [UDT_VarcharMediano]
+alter table Fact.Orden add TipoDocumento   [UDT_VarcharMediano]
 alter table Fact.Orden add FechaCreacion  [UDT_DateTime]
 alter table Fact.Orden add FechaModificacion  [UDT_DateTime]
-alter table Fact.Orden add ProcesadoPor   [UDT_VarcherMediano]
+alter table Fact.Orden add ProcesadoPor   [UDT_VarcharMediano]
 alter table Fact.Orden add AseguradoraSubsidiaria   [UDT_VarcharLargo]
-alter table Fact.Orden add NumeroReclamo   [UDT_VarcherMediano]
+alter table Fact.Orden add NumeroReclamo   [UDT_VarcharMediano]
 alter table Fact.Orden add OrdenRealizada   BIT
 alter table Fact.Orden add CotizacionRealizada   BIT
 alter table Fact.Orden add CotizacionDuplicada   BIT
-alter table Fact.Orden add procurementFolderID   [UDT_VarcherMediano]
-alter table Fact.Orden add DireccionEntrega1   [UDT_VarcherMediano]
-alter table Fact.Orden add DireccionEntrega2   [UDT_VarcherMediano]
+alter table Fact.Orden add procurementFolderID   [UDT_VarcharMediano]
+alter table Fact.Orden add DireccionEntrega1   [UDT_VarcharMediano]
+alter table Fact.Orden add DireccionEntrega2   [UDT_VarcharMediano]
 alter table Fact.Orden add MarcadoEntrega   BIT
 alter table Fact.Orden add CodigoPostal  [UDT_VarcharCorto]
 alter table Fact.Orden add LeidoPorPlantaReparacion    BIT
 alter table Fact.Orden add LeidoPorPlantaReparacionFecha   [UDT_DateTime]
 alter table Fact.Orden add CotizacionReabierta     BIT
 alter table Fact.Orden add EsAseguradora     BIT
-alter table Fact.Orden add CodigoVerificacion   [UDT_VarcherMediano]
+alter table Fact.Orden add CodigoVerificacion   [UDT_VarcharMediano]
 alter table Fact.Orden add FechaCreacionRegistro   [UDT_DateTime]
 alter table Fact.Orden add PartnerConfirmado     BIT
-alter table Fact.Orden add WrittenBy   [UDT_VarcherMediano]
+alter table Fact.Orden add WrittenBy   [UDT_VarcharMediano]
 alter table Fact.Orden add SeguroValidado      BIT
 alter table Fact.Orden add FechaCaptura   [UDT_DateTime]
 alter table Fact.Orden add Ruta   [UDT_VarcharLargo]
-alter table Fact.Orden add FechaLimiteRuta   [UDT_VarcherMediano]
+alter table Fact.Orden add FechaLimiteRuta   [UDT_VarcharMediano]
 alter table Fact.Orden add TelefonoEntrega [UDT_VarcharCorto]
 alter table Fact.Orden add OETipoParte [UDT_VarcharCorto]
-alter table Fact.Orden add AltPartNum   [UDT_VarcherMediano]
-alter table Fact.Orden add AltTipoParte   [UDT_VarcherMediano]
-alter table Fact.Orden add ciecaTipoParte   [UDT_VarcherMediano]
+alter table Fact.Orden add AltPartNum   [UDT_VarcharMediano]
+alter table Fact.Orden add AltTipoParte   [UDT_VarcharMediano]
+alter table Fact.Orden add ciecaTipoParte   [UDT_VarcharMediano]
 alter table Fact.Orden add partDescripcion   [UDT_VarcharLargo]
 alter table Fact.Orden add PrecioListaOnRO [UDT_VarcharCorto]
 alter table Fact.Orden add PrecioNetoOnRO [UDT_VarcharCorto]
 alter table Fact.Orden add NecesitadoParaFecha   [UDT_DateTime]
+--columnas de linaje
+alter table Fact.Orden add ID_Batch uniqueidentifier null
+alter table Fact.Orden add ID_SourceSystem varchar(50)
+--Dimension Partes 
+alter table Dimension.Partes add ID_Parte [UDT_VarcharCorto]
+alter table Dimension.Partes add ID_Linea [UDT_PK]
+alter table Dimension.Partes add ID_Categoria [UDT_PK]
+alter table Dimension.Partes add NombreParte [UDT_VarcharCorto]
+alter table Dimension.Partes add DescripcionParte [UDT_VarcharLargo]
+alter table Dimension.Partes add PrecioParte [UDT_Decimal12.2]
+alter table Dimension.Partes add NombreCategoria [UDT_VarcharCorto]
+alter table Dimension.Partes add DescripcionCategoria [UDT_VarcharLargo]
+alter table Dimension.Partes add NombreLinea [UDT_VarcharCorto]
+alter table Dimension.Partes add DescripcionLinea [UDT_VarcharLargo]
+--Dimension Geografia
+alter table Dimension.Geografia add ID_Pais [UDT_PK]  
+alter table Dimension.Geografia add ID_Region [UDT_PK]
+alter table Dimension.Geografia add ID_Ciudad [UDT_PK]  
+alter table Dimension.Geografia add NombrePais [UDT_VarcharCorto]
+alter table Dimension.Geografia add NombreRegion [UDT_VarcharCorto]
+alter table Dimension.Geografia add NombreCiudad [UDT_VarcharCorto]
+alter table Dimension.Geografia add CodigoPostal  [UDT_VarcharCorto]
+--Dimension Cliente
+alter table Dimension.Clientes add ID_Cliente [UDT_PK]
+alter table Dimension.Clientes add PrimerNombre [UDT_VarcharCorto]
+alter table Dimension.Clientes add SegundoNombre [UDT_VarcharCorto]
+alter table Dimension.Clientes add PrimerApellido [UDT_VarcharCorto]
+alter table Dimension.Clientes add SegundoApellido [UDT_VarcharCorto]
+alter table Dimension.Clientes add Genero [UDT_UnCaracter]
+alter table Dimension.Clientes add Correo_Electronico [UDT_VarcharCorto]
+alter table Dimension.Clientes add FechaNacimiento [UDT_DateTime]
+--Dimension StatusOrden
+alter table Dimension.StatusOrden add ID_StatusOrden [UDT_PK]
+alter table Dimension.StatusOrden add NombreStatus [UDT_VarcharLargo]
+--Dimension Aseguradoras
+alter table Dimension.Aseguradoras add ID_Aseguradora [UDT_PK]
+alter table Dimension.Aseguradoras add NombreAseguradora [UDT_VarcharLargo]
+alter table Dimension.Aseguradoras add RowCreatedDate [UDT_DateTime]
+alter table Dimension.Aseguradoras add Activa      BIT
+--Dimension PlantaReparacion
+alter table Dimension.PlantaReparacion add ID_PlantaReparacion [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add CompanyNombre   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add Direccion   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add Direccion2   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add Ciudad   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add Estado   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add CodigoPostal   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add Pais   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add TelefonoAlmacen   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add FaxAlmacen   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add CorreoContacto   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add NombreContacto   [UDT_VarcharLargo]
+alter table Dimension.PlantaReparacion add TelefonoContacto   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add TituloTrabajo   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add AlmacenKeystone   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add IDPredio   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add LocalizadorCotizacion   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add FechaAgregado [UDT_DateTime]
+alter table Dimension.PlantaReparacion add IDEmpresa   [UDT_VarcharCorto]
+alter table Dimension.PlantaReparacion add ValidacionSeguro      BIT
+alter table Dimension.PlantaReparacion add Activo      BIT
+alter table Dimension.PlantaReparacion add CreadoPor   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add ActualizadoPor   [UDT_VarcharMediano]
+alter table Dimension.PlantaReparacion add UltimaFechaActualizacion [UDT_DateTime]
+--Dimension Vehiculo
+alter table Dimension.Vehiculo add VehiculoID [UDT_PK]
+alter table Dimension.Vehiculo add VIN_Patron [UDT_VarcharCorto]
+alter table Dimension.Vehiculo add Anio SMALLINT
+alter table Dimension.Vehiculo add Marca [UDT_VarcharMediano]
+alter table Dimension.Vehiculo add Modelo [UDT_VarcharMediano]
+alter table Dimension.Vehiculo add SubModelo [UDT_VarcharLargo]
+alter table Dimension.Vehiculo add Estilo [UDT_VarcharLargo]
+alter table Dimension.Vehiculo add FechaCreacion [UDT_DateTime]
+--Dimension Descuento
+alter table Dimension.Descuento add ID_Descuento [UDT_PK]
+alter table Dimension.Descuento add NombreDescuento [UDT_VarcharLargo]
+alter table Dimension.Descuento add PorcentajeDescuento [UDT_Decimal12.2]
+--Dimension Fecha
+alter table Dimension.Fecha add [Date] DATE NOT NULL
+alter table Dimension.Fecha add [Day] TINYINT NOT NULL
+alter table Dimension.Fecha add [DaySuffix] CHAR(2) NOT NULL
+alter table Dimension.Fecha add [Weekday] TINYINT NOT NULL
+alter table Dimension.Fecha add [WeekDayName] VARCHAR(10) NOT NULL
+alter table Dimension.Fecha add [WeekDayName_Short] CHAR(3) NOT NULL
+alter table Dimension.Fecha add [WeekDayName_FirstLetter] CHAR(1) NOT NULL
+alter table Dimension.Fecha add [DOWInMonth] TINYINT NOT NULL
+alter table Dimension.Fecha add [DayOfYear] SMALLINT NOT NULL
+alter table Dimension.Fecha add [WeekOfMonth] TINYINT NOT NULL
+alter table Dimension.Fecha add [WeekOfYear] TINYINT NOT NULL
+alter table Dimension.Fecha add [Month] TINYINT NOT NULL
+alter table Dimension.Fecha add [MonthName] VARCHAR(10) NOT NULL
+alter table Dimension.Fecha add [MonthName_Short] CHAR(3) NOT NULL
+alter table Dimension.Fecha add [MonthName_FirstLetter] CHAR(1) NOT NULL
+alter table Dimension.Fecha add [Quarter] TINYINT NOT NULL
+alter table Dimension.Fecha add [QuarterName] VARCHAR(6) NOT NULL
+alter table Dimension.Fecha add [Year] INT NOT NULL
+alter table Dimension.Fecha add [MMYYYY] CHAR(6) NOT NULL
+alter table Dimension.Fecha add [MonthYear] CHAR(7) NOT NULL
+alter table Dimension.Fecha add IsWeekend BIT NOT NULL
+--Indices Columnares
+--indices columnares hacen mas eficientes las funciones de agregacion
+--este indice va ayudar para poder hacer el cubo posteriormente ya que el cubo hace un presosamiento de la informacion
+CREATE NONCLUSTERED COLUMNSTORE INDEX [NCCS-Total] ON [Fact].[Orden]
+(
+	[Total_Orden],
+	[Cantidad]
+)WITH (DROP_EXISTING = OFF, COMPRESSION_DELAY = 0)
+GO
