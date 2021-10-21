@@ -39,9 +39,7 @@ BEGIN
 				O.NumLinea ,
 				O.Total_Orden ,
 				O.Cantidad ,
-				O.NombreStatus ,
 				O.Fecha_Orden ,
-				O.Fecha_Modificacion ,
 				O.status_cotizacion  ,
 				O.TipoDocumento   ,
 				O.ProcesadoPor   ,
@@ -115,9 +113,7 @@ BEGIN
 				NumLinea ,
 				Total_Orden ,
 				Cantidad ,
-				NombreStatus ,
 				Fecha_Orden ,
-				Fecha_Modificacion ,
 				status_cotizacion  ,
 				TipoDocumento   ,
 				ProcesadoPor   ,
@@ -171,9 +167,7 @@ BEGIN
 					S.NumLinea ,
 					S.Total_Orden ,
 					S.Cantidad ,
-					S.NombreStatus ,
 					S.Fecha_Orden ,
-					S.Fecha_Modificacion ,
 					S.status_cotizacion  ,
 					S.TipoDocumento   ,
 					S.ProcesadoPor   ,
@@ -220,7 +214,7 @@ BEGIN
 			SELECT MAX(Fecha_Orden) as MaxFechaEjecucion
 			FROM FACT.Orden
 			UNION
-			SELECT MAX(Fecha_Modificacion)  as MaxFechaEjecucion
+			SELECT MAX(FechaModificacion)  as MaxFechaEjecucion
 			FROM FACT.Orden
 		)AS A
 
