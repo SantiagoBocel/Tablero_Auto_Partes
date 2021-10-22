@@ -11,8 +11,8 @@
   DTS:LocaleID="2058"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{FDAF046F-6CC2-4D21-A6A0-6C4F6D097732}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{B159FD8A-1165-4EC0-BB0E-FE64A781B0FA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -41,7 +41,17 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C6F5E494-ACFF-424E-8FE2-B32AC0FC3A4E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="VFechaEjecucion">
+      <DTS:VariableValue
+        DTS:DataType="7">10/22/2021 10:28:21 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Contenedor de secuencias"
@@ -886,7 +896,7 @@ where ((Fecha_Orden&gt;?))</property>
                     <property
                       dataType="System.String"
                       description="Asignaciones entre los parámetros del comando SQL y las variables."
-                      name="ParameterMapping"></property>
+                      name="ParameterMapping">"Parámetro0:Input",{C6F5E494-ACFF-424E-8FE2-B32AC0FC3A4E};</property>
                   </properties>
                   <connections>
                     <connection
@@ -2084,6 +2094,14 @@ where ((Fecha_Orden&gt;?))</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="147,42"
+          Id="Package\Contenedor de secuencias\Actualizar Fact"
+          TopLeft="169,298" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Contenedor de secuencias\Cargar a Staging"
+          TopLeft="156,212" />
+        <NodeLayout
           Size="152,42"
           Id="Package\Contenedor de secuencias\Limpiar Staging"
           TopLeft="158,29" />
@@ -2091,14 +2109,6 @@ where ((Fecha_Orden&gt;?))</property>
           Size="203,42"
           Id="Package\Contenedor de secuencias\Ultima Fecha de Ejecucion"
           TopLeft="140,129" />
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Contenedor de secuencias\Cargar a Staging"
-          TopLeft="156,212" />
-        <NodeLayout
-          Size="147,42"
-          Id="Package\Contenedor de secuencias\Actualizar Fact"
-          TopLeft="169,298" />
         <EdgeLayout
           Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción]"
           TopLeft="237.75,71">
@@ -2181,13 +2191,13 @@ where ((Fecha_Orden&gt;?))</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="190,47"
-          Id="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden"
-          TopLeft="311,283" />
-        <NodeLayout
           Size="164,42"
           Id="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB"
           TopLeft="327,162" />
+        <NodeLayout
+          Size="190,47"
+          Id="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden"
+          TopLeft="311,283" />
         <EdgeLayout
           Id="Package\Contenedor de secuencias\Cargar a Staging.Paths[Salida de origen de OLE DB]"
           TopLeft="407.5,204">
