@@ -75,7 +75,9 @@ BEGIN
 				O.PrecioNetoOnRO ,
 				O.NecesitadoParaFecha   ,
 				getdate() as FechaCreacion,
+				'ETL' as UsuarioCreacion, 
 				NULL as FechaModificacion, 
+				NULL as UsuarioModificacion, 
 				@NuevoGUIDINsert as ID_Batch,
 				'ssis' as ID_SourceSystem
 			from staging.Orden O
@@ -149,7 +151,9 @@ BEGIN
 				PrecioNetoOnRO ,
 				NecesitadoParaFecha   ,
 				FechaCreacion, 
+				UsuarioCreacion, 
 				FechaModificacion, 
+				UsuarioModificacion,
 				ID_Batch, 
 				ID_SourceSystem)
 		VALUES (	S.SK_Partes,
@@ -203,7 +207,9 @@ BEGIN
 					S.PrecioNetoOnRO ,
 					S.NecesitadoParaFecha, 
 					S.FechaCreacion, 
+					S.UsuarioCreacion,
 					S.FechaModificacion, 
+					S.UsuarioModificacion,
 					S.ID_Batch, 
 					S.ID_SourceSystem);
 

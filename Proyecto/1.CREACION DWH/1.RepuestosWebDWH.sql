@@ -253,8 +253,6 @@ alter table Fact.Orden add Cantidad [UDT_INT]---duda si es necesario para los in
 alter table Fact.Orden add Fecha_Orden [UDT_DateTime]
 alter table Fact.Orden add status_cotizacion  [UDT_VarcharMediano]
 alter table Fact.Orden add TipoDocumento   [UDT_VarcharMediano]
-alter table Fact.Orden add FechaCreacion  [UDT_DateTime]
-alter table Fact.Orden add FechaModificacion  [UDT_DateTime]
 alter table Fact.Orden add ProcesadoPor   [UDT_VarcharMediano]
 alter table Fact.Orden add AseguradoraSubsidiaria   [UDT_VarcharLargo]
 alter table Fact.Orden add NumeroReclamo   [UDT_VarcharMediano]
@@ -287,6 +285,11 @@ alter table Fact.Orden add partDescripcion   [UDT_VarcharLargo]
 alter table Fact.Orden add PrecioListaOnRO [UDT_VarcharCorto]
 alter table Fact.Orden add PrecioNetoOnRO [UDT_VarcharCorto]
 alter table Fact.Orden add NecesitadoParaFecha   [UDT_DateTime]
+--columnas de auditoria
+alter table Fact.Orden add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Fact.Orden add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Fact.Orden add FechaModificacion [UDT_DateTime]
+alter table Fact.Orden add UsuarioModificacion nvarchar(100) null
 --columnas de linaje
 alter table Fact.Orden add ID_Batch uniqueidentifier null
 alter table Fact.Orden add ID_SourceSystem varchar(50)
@@ -301,6 +304,14 @@ alter table Dimension.Partes add NombreCategoria [UDT_VarcharCorto]
 alter table Dimension.Partes add DescripcionCategoria [UDT_VarcharLargo]
 alter table Dimension.Partes add NombreLinea [UDT_VarcharCorto]
 alter table Dimension.Partes add DescripcionLinea [UDT_VarcharLargo]
+--columnas scd tipo 2
+alter table Dimension.Partes add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.Partes add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.Partes add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.Partes add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.Partes add FechaModificacion [UDT_DateTime]
+alter table Dimension.Partes add UsuarioModificacion nvarchar(100) null
 --Dimension Geografia
 alter table Dimension.Geografia add ID_Pais [UDT_PK]  
 alter table Dimension.Geografia add ID_Region [UDT_PK]
@@ -309,6 +320,14 @@ alter table Dimension.Geografia add NombrePais [UDT_VarcharCorto]
 alter table Dimension.Geografia add NombreRegion [UDT_VarcharCorto]
 alter table Dimension.Geografia add NombreCiudad [UDT_VarcharCorto]
 alter table Dimension.Geografia add CodigoPostal  [UDT_VarcharCorto]
+--columnas scd tipo 2
+alter table Dimension.Geografia add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.Geografia add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.Geografia add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.Geografia add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.Geografia add FechaModificacion [UDT_DateTime]
+alter table Dimension.Geografia add UsuarioModificacion nvarchar(100) null
 --Dimension Cliente
 alter table Dimension.Clientes add ID_Cliente [UDT_PK]
 alter table Dimension.Clientes add PrimerNombre [UDT_VarcharCorto]
@@ -318,14 +337,38 @@ alter table Dimension.Clientes add SegundoApellido [UDT_VarcharCorto]
 alter table Dimension.Clientes add Genero [UDT_UnCaracter]
 alter table Dimension.Clientes add Correo_Electronico [UDT_VarcharCorto]
 alter table Dimension.Clientes add FechaNacimiento [UDT_DateTime]
+--columnas scd tipo 2
+alter table Dimension.Clientes add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.Clientes add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.Clientes add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.Clientes add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.Clientes add FechaModificacion [UDT_DateTime]
+alter table Dimension.Clientes add UsuarioModificacion nvarchar(100) null
 --Dimension StatusOrden
 alter table Dimension.StatusOrden add ID_StatusOrden [UDT_PK]
 alter table Dimension.StatusOrden add NombreStatus [UDT_VarcharLargo]
+--columnas scd tipo 2
+alter table Dimension.StatusOrden add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.StatusOrden add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.StatusOrden add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.StatusOrden add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.StatusOrden add FechaModificacion [UDT_DateTime]
+alter table Dimension.StatusOrden add UsuarioModificacion nvarchar(100) null
 --Dimension Aseguradoras
 alter table Dimension.Aseguradoras add ID_Aseguradora [UDT_PK]
 alter table Dimension.Aseguradoras add NombreAseguradora [UDT_VarcharLargo]
 alter table Dimension.Aseguradoras add RowCreatedDate [UDT_DateTime]
 alter table Dimension.Aseguradoras add Activa      BIT
+--columnas scd tipo 2
+alter table Dimension.Aseguradoras add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.Aseguradoras add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.Aseguradoras add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.Aseguradoras add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.Aseguradoras add FechaModificacion [UDT_DateTime]
+alter table Dimension.Aseguradoras add UsuarioModificacion nvarchar(100) null
 --Dimension PlantaReparacion
 alter table Dimension.PlantaReparacion add ID_PlantaReparacion [UDT_VarcharMediano]
 alter table Dimension.PlantaReparacion add CompanyNombre   [UDT_VarcharMediano]
@@ -351,6 +394,14 @@ alter table Dimension.PlantaReparacion add Activo      BIT
 alter table Dimension.PlantaReparacion add CreadoPor   [UDT_VarcharMediano]
 alter table Dimension.PlantaReparacion add ActualizadoPor   [UDT_VarcharMediano]
 alter table Dimension.PlantaReparacion add UltimaFechaActualizacion [UDT_DateTime]
+--columnas scd tipo 2
+alter table Dimension.PlantaReparacion add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.PlantaReparacion add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.PlantaReparacion add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.PlantaReparacion add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.PlantaReparacion add FechaModificacion [UDT_DateTime]
+alter table Dimension.PlantaReparacion add UsuarioModificacion nvarchar(100) null
 --Dimension Vehiculo
 alter table Dimension.Vehiculo add VehiculoID [UDT_PK]
 alter table Dimension.Vehiculo add VIN_Patron [UDT_VarcharCorto]
@@ -359,11 +410,26 @@ alter table Dimension.Vehiculo add Marca [UDT_VarcharMediano]
 alter table Dimension.Vehiculo add Modelo [UDT_VarcharMediano]
 alter table Dimension.Vehiculo add SubModelo [UDT_VarcharLargo]
 alter table Dimension.Vehiculo add Estilo [UDT_VarcharLargo]
-alter table Dimension.Vehiculo add FechaCreacion [UDT_DateTime]
+--columnas scd tipo 2
+alter table Dimension.Vehiculo add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.Vehiculo add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.Vehiculo add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.Vehiculo add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.Vehiculo add FechaModificacion [UDT_DateTime]
+alter table Dimension.Vehiculo add UsuarioModificacion nvarchar(100) null
 --Dimension Descuento
 alter table Dimension.Descuento add ID_Descuento [UDT_PK]
 alter table Dimension.Descuento add NombreDescuento [UDT_VarcharLargo]
 alter table Dimension.Descuento add PorcentajeDescuento [UDT_Decimal12.2]
+--columnas scd tipo 2
+alter table Dimension.Descuento add FechaInicioValidez [UDT_DateTime] not null default (getdate())
+alter table Dimension.Descuento add FechaFinValidez [UDT_DateTime] null
+--columnas de auditoria
+alter table Dimension.Descuento add FechaCreacion [UDT_DateTime] not null default(getdate())
+alter table Dimension.Descuento add UsuarioCreacion nvarchar(100) not null default(suser_name())
+alter table Dimension.Descuento add FechaModificacion [UDT_DateTime]
+alter table Dimension.Descuento add UsuarioModificacion nvarchar(100) null
 --Dimension Fecha
 alter table Dimension.Fecha add [Date] DATE NOT NULL
 alter table Dimension.Fecha add [Day] TINYINT NOT NULL

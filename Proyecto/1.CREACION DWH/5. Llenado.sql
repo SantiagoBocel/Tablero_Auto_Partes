@@ -11,7 +11,11 @@ select
 	C.Nombre as NombreCategoria,
 	C.Descripcion as DescripcionCategoria,
 	L.Nombre as NombreLinea,
-	L.Descripcion as DescripcionLinea
+	L.Descripcion as DescripcionLinea,
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.Categoria C 
 inner join dbo.Partes P on(P.ID_Categoria=C.ID_Categoria)
 inner join dbo.Linea L on (L.ID_Linea=C.ID_Linea)
@@ -23,7 +27,11 @@ select
 	P.Nombre as NombrePais,
 	R.Nombre as NombreRegion,
 	C.Nombre as NombreCiudad,
-	C.CodigoPostal
+	C.CodigoPostal,
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.Region R
 inner join dbo.Pais P on (R.ID_Pais=P.ID_Pais)
 inner join dbo.Ciudad C on (R.ID_Region=C.ID_Region)
@@ -36,19 +44,31 @@ select
 	C.SegundoApellido,
 	C.Genero,
 	C.Correo_Electronico,
-	C.FechaNacimiento
+	C.FechaNacimiento,
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.Clientes C
 -----------query para llenar la dimension StatusOrden
 select 
 	SO.ID_StatusOrden,
-	SO.NombreStatus
+	SO.NombreStatus,
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.[StatusOrden] SO
 -----------query para llenar la dimension Aseguradoras
 select 
 	A.[IDAseguradora],
 	A.[NombreAseguradora],
 	A.[RowCreatedDate],
-	A.[Activa]
+	A.[Activa],
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.[Aseguradoras] A
 -----------query para llenar la dimension PlantaReparacion
 select 
@@ -75,7 +95,11 @@ select
 	PR.[Activo],
 	PR.[CreadoPor],
 	PR.[ActualizadoPor],
-	PR.[UltimaFechaActualizacion]
+	PR.[UltimaFechaActualizacion],
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.[PlantaReparacion] PR
 -----------query para llenar la dimension Vehiculo
 select 
@@ -86,13 +110,20 @@ select
 	V.[Modelo],
 	V.[SubModelo],
 	V.[Estilo],
-	V.[FechaCreacion]
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.Vehiculo V
 -----------query para llenar la dimension Descuento
 select 
 	D.[ID_Descuento],
 	D.[NombreDescuento],
-	[PorcentajeDescuento]
+	[PorcentajeDescuento],
+	GETDATE() AS FechaCreacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioCreacion,
+	GETDATE() AS FechaModificacion,
+	CAST(SUSER_NAME() AS nvarchar(100)) AS UsuarioModificacion
 from dbo.Descuento D
 -----------query para llenar staging
 use RepuestosWeb
@@ -158,10 +189,13 @@ inner join dbo.PlantaReparacion PR on (Co.IDPlantaReparacion = PR.IDPlantaRepara
 inner join dbo.Vehiculo V on(Cod.VehiculoID = V.VehiculoID)
 inner join dbo.Descuento D on (DO.ID_Descuento=D.ID_Descuento)
 inner join dbo.StatusOrden S on (O.ID_StatusOrden=S.ID_StatusOrden)
-
-select O.ID_Orden, 
-		O.ID_Cliente
-from dbo.Orden O inner join dbo.Clientes C on (O.ID_Cliente = C.ID_Cliente)
+where ((Fecha_Orden>?) or (Fecha_Modificacion>?))
+--query para determinar la fecha maxima
+SELECT ISNULL(MAX(FechaEjecucion),'1900-01-01') AS UltimaFecha
+FROM FactLog
+--select O.ID_Orden, 
+--		O.ID_Cliente
+--from dbo.Orden O inner join dbo.Clientes C on (O.ID_Cliente = C.ID_Cliente)
 ---query para el procedimiento
 use RepuestosWebDWH
 go

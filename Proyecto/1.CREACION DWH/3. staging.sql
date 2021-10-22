@@ -46,8 +46,6 @@ Create table staging.Orden
 	Fecha_Orden datetime null,
 	status_cotizacion varchar(200) null ,
 	TipoDocumento  varchar(200) null ,
-	FechaCreacion  datetime null,
-	FechaModificacion  datetime null,
 	ProcesadoPor   varchar(200) null,
 	AseguradoraSubsidiaria  varchar(500) null,
 	NumeroReclamo   varchar(200) null ,
