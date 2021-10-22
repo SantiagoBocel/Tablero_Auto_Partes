@@ -189,7 +189,8 @@ inner join dbo.PlantaReparacion PR on (Co.IDPlantaReparacion = PR.IDPlantaRepara
 inner join dbo.Vehiculo V on(Cod.VehiculoID = V.VehiculoID)
 inner join dbo.Descuento D on (DO.ID_Descuento=D.ID_Descuento)
 inner join dbo.StatusOrden S on (O.ID_StatusOrden=S.ID_StatusOrden)
-where ((Fecha_Orden>?) or (Fecha_Modificacion>?))
+--inner join dbo.Clientes C on (O.ID_Cliente = C.ID_Cliente)
+where ((Fecha_Orden>?) or (FechaModificacion>?))
 --query para determinar la fecha maxima
 SELECT ISNULL(MAX(FechaEjecucion),'1900-01-01') AS UltimaFecha
 FROM FactLog

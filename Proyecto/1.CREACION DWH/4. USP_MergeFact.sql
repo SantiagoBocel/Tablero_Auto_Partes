@@ -81,7 +81,7 @@ BEGIN
 				@NuevoGUIDINsert as ID_Batch,
 				'ssis' as ID_SourceSystem
 			from staging.Orden O
-			inner join Dimension.Clientes C on (O.ID_Cliente=C.ID_Cliente)
+			inner join Dimension.Clientes C on (O.ID_Cliente =C.ID_Cliente)
 			inner join Dimension.Partes P on (O.ID_Parte=P.ID_Parte)
 			inner join Dimension.Geografia G on (O.ID_Ciudad=G.ID_Ciudad)
 			inner join Dimension.StatusOrden SO on (O.ID_StatusOrden = SO.ID_StatusOrden)

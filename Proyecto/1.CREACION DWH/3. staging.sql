@@ -44,6 +44,7 @@ Create table staging.Orden
 	Total_Orden int null,
 	Cantidad int null,
 	Fecha_Orden datetime null,
+	FechaModificacion datetime null,
 	status_cotizacion varchar(200) null ,
 	TipoDocumento  varchar(200) null ,
 	ProcesadoPor   varchar(200) null,
