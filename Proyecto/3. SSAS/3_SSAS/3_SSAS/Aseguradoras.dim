@@ -1,0 +1,281 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="c01b9b0d-02c5-43c0-ac7e-9a14524e4887" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Aseguradoras</ID>
+  <Name>Aseguradoras</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="8b03316e-0c32-4e86-a479-62e45d232f90">
+    <DataSourceViewID>Repuestos Web DWH</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="4a76ab60-b380-4c44-920b-64c919324ae4">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="9ce6f210-a8f1-41af-b511-a6a12fbd1ce7">
+      <ID>SK Aseguradoras</ID>
+      <Name>SK Aseguradoras</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e040ddee-be8c-44d1-af6e-b772af7d9c44">
+          <DataType>Integer</DataType>
+          <NullProcessing>UnknownMember</NullProcessing>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="71f4d6c9-a1fa-4ab2-9040-43a99e69f5e4">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>SK_Aseguradoras</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="ede23b44-53b8-4d28-9e44-fbc6764da998">
+          <AttributeID>ID Aseguradora</AttributeID>
+          <Name>ID Aseguradora</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="f296b712-8080-4e23-b356-878f36f2a358">
+          <AttributeID>Nombre Aseguradora</AttributeID>
+          <Name>Nombre Aseguradora</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a87bc90f-6418-4e9f-92cd-8ed953fb3d6f">
+          <AttributeID>Row Created Date</AttributeID>
+          <Name>Row Created Date</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="23a83fd3-26d7-4b53-a1a0-42597fd4dce3">
+          <AttributeID>Activa</AttributeID>
+          <Name>Activa</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="661f8bc6-6616-44ca-a21f-b2f2e99deafa">
+          <AttributeID>Fecha Inicio Validez</AttributeID>
+          <Name>Fecha Inicio Validez</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="ff1f9a8c-312f-40fa-bfa6-2ae2f19ccfbe">
+          <AttributeID>Fecha Fin Validez</AttributeID>
+          <Name>Fecha Fin Validez</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="f2d8bc10-ad4c-4e4b-a954-212de0d9ff40">
+          <AttributeID>Fecha Creacion</AttributeID>
+          <Name>Fecha Creacion</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="3c3afdbf-0f84-4444-9e9d-fb1a38ae5681">
+          <AttributeID>Usuario Creacion</AttributeID>
+          <Name>Usuario Creacion</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="d6111682-3238-4e9d-ba9f-01e943e4adfc">
+          <AttributeID>Fecha Modificacion</AttributeID>
+          <Name>Fecha Modificacion</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a9d6afac-d618-4765-83d7-54fea3eca6fa">
+          <AttributeID>Usuario Modificacion</AttributeID>
+          <Name>Usuario Modificacion</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="dad93949-7866-4f6e-9e9b-05729671d607">
+      <ID>ID Aseguradora</ID>
+      <Name>ID Aseguradora</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ea4ad322-681b-4bca-aeb4-8d9f65673076">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4527e9ce-cde9-4a68-aae1-9788923535d1">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>ID_Aseguradora</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="a6c32600-40bd-4db2-b7cb-1d1938794a5b">
+      <ID>Nombre Aseguradora</ID>
+      <Name>Nombre Aseguradora</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="9511285a-04a7-445d-9550-72869f360218">
+          <DataType>WChar</DataType>
+          <DataSize>500</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3232c804-6ac0-4eca-bfb1-91110878cb07">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>NombreAseguradora</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="26e46e9e-1350-44d0-b578-ab91821ec556">
+      <ID>Row Created Date</ID>
+      <Name>Row Created Date</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="16958a9f-0f87-4168-8c0e-dc76cc22670c">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e2ca1ce9-1bb5-4e29-a954-5b8c331a8420">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>RowCreatedDate</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="405d6c6b-6c95-457d-a8ab-8a371c1eaaac">
+      <ID>Activa</ID>
+      <Name>Activa</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="061da28e-c957-4999-8730-718e8b6f89e0">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6c5e5d43-75c3-4405-8a7b-55c9eecbc4c7">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>Activa</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="75287764-a3c4-4d51-acbf-6d67da33e98e">
+      <ID>Fecha Inicio Validez</ID>
+      <Name>Fecha Inicio Validez</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c10ef930-91c7-4a12-b1c5-bc891d97fc44">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="06eeae8e-c03e-4970-b8e3-ec71021c502c">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>FechaInicioValidez</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="fbce5afd-9205-421c-8eca-5459b4acbc29">
+      <ID>Fecha Fin Validez</ID>
+      <Name>Fecha Fin Validez</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="1a732431-5bd6-4886-92c5-f5a835f3c290">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="dde77693-9d76-4392-9bc8-ba7734563512">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>FechaFinValidez</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="6a2b8b42-8177-4998-9dec-43379b3760f0">
+      <ID>Fecha Creacion</ID>
+      <Name>Fecha Creacion</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e3151591-a73f-42a3-a91c-630125e9adde">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="cc1dbb1d-e24f-4f1c-a491-5994125e3134">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>FechaCreacion</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="4bc284c5-6c72-404d-81c9-575403ddf878">
+      <ID>Usuario Creacion</ID>
+      <Name>Usuario Creacion</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7e82fb62-e8ad-48ef-9958-8b12ae3589fe">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8a302f19-ac43-4467-b8f2-d9b5b954bd4a">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>UsuarioCreacion</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="e1375b4f-2b55-43be-a737-198b514f03cc">
+      <ID>Fecha Modificacion</ID>
+      <Name>Fecha Modificacion</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="858af9d8-61b1-4b8a-b321-34f3c403f589">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f6898592-2748-442d-9d21-43148f8c3c5d">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>FechaModificacion</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="9fcb430d-02b2-477d-8f72-bee390a007be">
+      <ID>Usuario Modificacion</ID>
+      <Name>Usuario Modificacion</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d9e8bebf-ed5a-4f0c-beea-66f155aca70f">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="fd9b7792-a2f0-49a6-a9f7-ee1f2881983f">
+            <TableID>Dimension_Aseguradoras</TableID>
+            <ColumnID>UsuarioModificacion</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

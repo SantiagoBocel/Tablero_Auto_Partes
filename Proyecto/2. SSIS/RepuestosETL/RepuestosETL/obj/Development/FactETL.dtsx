@@ -11,11 +11,47 @@
   DTS:LocaleID="2058"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{E8979FC2-F457-4888-9492-762274F351E5}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{B159FD8A-1165-4EC0-BB0E-FE64A781B0FA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:Variables />
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.RepuestosWeb]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3E3F40D8-3654-4F4F-8899-F25D4760F48F}"
+      DTS:ObjectName="localhost.RepuestosWeb">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=RepuestosWeb;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.RepuestosWebDWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9C988F4C-41BA-413E-BDDE-0EF76EB796D8}"
+      DTS:ObjectName="localhost.RepuestosWebDWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=RepuestosWebDWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C6F5E494-ACFF-424E-8FE2-B32AC0FC3A4E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="VFechaEjecucion">
+      <DTS:VariableValue
+        DTS:DataType="7">10/22/2021 10:28:21 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Contenedor de secuencias"
@@ -28,6 +64,1960 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Actualizar Fact"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{0FB715C7-F94A-4AA8-82D3-AE6FE8664B08}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Actualizar Fact"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9C988F4C-41BA-413E-BDDE-0EF76EB796D8}"
+              SQLTask:SqlStatementSource="USP_MergeFact" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Cargar a Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarea Flujo de datos"
+          DTS:DTSID="{43CFDD23-53D0-49FC-97ED-E6B2DFE0878D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Cargar a Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino de OLE DB"
+                  name="Cargar a Staging Orden"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[staging].[Orden]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.RepuestosWebDWH]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.RepuestosWebDWH]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB]"
+                      errorOrTruncationOperation="Insertar"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de destino de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_Orden]"
+                          cachedDataType="i4"
+                          cachedName="ID_Orden"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Orden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Orden]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_DetalleOrden]"
+                          cachedDataType="i4"
+                          cachedName="ID_DetalleOrden"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_DetalleOrden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_DetalleOrden]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_Cotizacion]"
+                          cachedDataType="i4"
+                          cachedName="ID_Cotizacion"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Cotizacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Cotizacion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[NumLinea]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="NumLinea"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[NumLinea]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NumLinea]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_Cliente]"
+                          cachedDataType="i4"
+                          cachedName="ID_Cliente"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Cliente]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Cliente]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_Ciudad]"
+                          cachedDataType="i4"
+                          cachedName="ID_Ciudad"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Ciudad]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Ciudad]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_Parte]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ID_Parte"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Parte]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Parte]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_StatusOrden]"
+                          cachedDataType="i4"
+                          cachedName="ID_StatusOrden"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_StatusOrden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_StatusOrden]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_Aseguradora]"
+                          cachedDataType="i4"
+                          cachedName="ID_Aseguradora"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Aseguradora]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Aseguradora]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_PlantaReparacion]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ID_PlantaReparacion"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_PlantaReparacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_PlantaReparacion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[VehiculoID]"
+                          cachedDataType="i4"
+                          cachedName="VehiculoID"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[VehiculoID]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[VehiculoID]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ID_Descuento]"
+                          cachedDataType="i4"
+                          cachedName="ID_Descuento"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Descuento]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Descuento]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[Total_Orden]"
+                          cachedDataType="numeric"
+                          cachedName="Total_Orden"
+                          cachedPrecision="12"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Total_Orden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Total_Orden]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[Cantidad]"
+                          cachedDataType="i4"
+                          cachedName="Cantidad"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cantidad]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cantidad]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[Fecha_Orden]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="Fecha_Orden"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha_Orden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha_Orden]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[status_cotizacion]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="status_cotizacion"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[status_cotizacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[status_cotizacion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[TipoDocumento]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="TipoDocumento"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[TipoDocumento]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TipoDocumento]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ProcesadoPor]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ProcesadoPor"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ProcesadoPor]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ProcesadoPor]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[AseguradoraSubsidiaria]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="80"
+                          cachedName="AseguradoraSubsidiaria"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[AseguradoraSubsidiaria]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AseguradoraSubsidiaria]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[NumeroReclamo]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="NumeroReclamo"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[NumeroReclamo]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NumeroReclamo]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[OrdenRealizada]"
+                          cachedDataType="bool"
+                          cachedName="OrdenRealizada"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrdenRealizada]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[OrdenRealizada]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[CotizacionRealizada]"
+                          cachedDataType="bool"
+                          cachedName="CotizacionRealizada"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CotizacionRealizada]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionRealizada]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[CotizacionDuplicada]"
+                          cachedDataType="bool"
+                          cachedName="CotizacionDuplicada"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CotizacionDuplicada]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionDuplicada]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[procurementFolderID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="procurementFolderID"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[procurementFolderID]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[procurementFolderID]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[DireccionEntrega1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DireccionEntrega1"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[DireccionEntrega1]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[DireccionEntrega1]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[DireccionEntrega2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DireccionEntrega2"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[DireccionEntrega2]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[DireccionEntrega2]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[MarcadoEntrega]"
+                          cachedDataType="bool"
+                          cachedName="MarcadoEntrega"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[MarcadoEntrega]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[MarcadoEntrega]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[CodigoPostal]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CodigoPostal"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CodigoPostal]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CodigoPostal]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[LeidoPorPlantaReparacion]"
+                          cachedDataType="bool"
+                          cachedName="LeidoPorPlantaReparacion"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[LeidoPorPlantaReparacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[LeidoPorPlantaReparacion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[LeidoPorPlantaReparacionFecha]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LeidoPorPlantaReparacionFecha"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[LeidoPorPlantaReparacionFecha]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[LeidoPorPlantaReparacionFecha]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[CotizacionReabierta]"
+                          cachedDataType="bool"
+                          cachedName="CotizacionReabierta"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CotizacionReabierta]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionReabierta]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[EsAseguradora]"
+                          cachedDataType="bool"
+                          cachedName="EsAseguradora"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[EsAseguradora]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EsAseguradora]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[CodigoVerificacion]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CodigoVerificacion"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CodigoVerificacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CodigoVerificacion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[FechaCreacionRegistro]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="FechaCreacionRegistro"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaCreacionRegistro]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCreacionRegistro]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[PartnerConfirmado]"
+                          cachedDataType="bool"
+                          cachedName="PartnerConfirmado"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[PartnerConfirmado]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PartnerConfirmado]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[WrittenBy]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="80"
+                          cachedName="WrittenBy"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[WrittenBy]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[WrittenBy]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[SeguroValidado]"
+                          cachedDataType="bool"
+                          cachedName="SeguroValidado"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[SeguroValidado]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[SeguroValidado]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[FechaCaptura]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="FechaCaptura"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaCaptura]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCaptura]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[Ruta]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="Ruta"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Ruta]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Ruta]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[FechaLimiteRuta]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="FechaLimiteRuta"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaLimiteRuta]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaLimiteRuta]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[TelefonoEntrega]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="TelefonoEntrega"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[TelefonoEntrega]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TelefonoEntrega]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[OETipoParte]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="OETipoParte"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[OETipoParte]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[OETipoParte]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[AltPartNum]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="45"
+                          cachedName="AltPartNum"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[AltPartNum]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AltPartNum]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[AltTipoParte]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="45"
+                          cachedName="AltTipoParte"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[AltTipoParte]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AltTipoParte]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[ciecaTipoParte]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="45"
+                          cachedName="ciecaTipoParte"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ciecaTipoParte]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ciecaTipoParte]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[partDescripcion]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="partDescripcion"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[partDescripcion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[partDescripcion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[PrecioListaOnRO]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="PrecioListaOnRO"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[PrecioListaOnRO]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PrecioListaOnRO]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[PrecioNetoOnRO]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="PrecioNetoOnRO"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[PrecioNetoOnRO]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PrecioNetoOnRO]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].Columns[NecesitadoParaFecha]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="NecesitadoParaFecha"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[NecesitadoParaFecha]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NecesitadoParaFecha]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Orden]"
+                          dataType="i4"
+                          name="ID_Orden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_DetalleOrden]"
+                          dataType="i4"
+                          name="ID_DetalleOrden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Cotizacion]"
+                          dataType="i4"
+                          name="ID_Cotizacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[NumLinea]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="NumLinea" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Cliente]"
+                          dataType="i4"
+                          name="ID_Cliente" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Ciudad]"
+                          dataType="i4"
+                          name="ID_Ciudad" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Parte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ID_Parte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_StatusOrden]"
+                          dataType="i4"
+                          name="ID_StatusOrden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Aseguradora]"
+                          dataType="i4"
+                          name="ID_Aseguradora" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_PlantaReparacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ID_PlantaReparacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[VehiculoID]"
+                          dataType="i4"
+                          name="VehiculoID" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID_Descuento]"
+                          dataType="i4"
+                          name="ID_Descuento" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Total_Orden]"
+                          dataType="i4"
+                          name="Total_Orden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cantidad]"
+                          dataType="i4"
+                          name="Cantidad" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha_Orden]"
+                          dataType="dbTimeStamp"
+                          name="Fecha_Orden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[status_cotizacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="status_cotizacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[TipoDocumento]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="TipoDocumento" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ProcesadoPor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="ProcesadoPor" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[AseguradoraSubsidiaria]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="AseguradoraSubsidiaria" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[NumeroReclamo]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="NumeroReclamo" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[OrdenRealizada]"
+                          dataType="bool"
+                          name="OrdenRealizada" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CotizacionRealizada]"
+                          dataType="bool"
+                          name="CotizacionRealizada" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CotizacionDuplicada]"
+                          dataType="bool"
+                          name="CotizacionDuplicada" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[procurementFolderID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="procurementFolderID" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[DireccionEntrega1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="DireccionEntrega1" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[DireccionEntrega2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="DireccionEntrega2" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[MarcadoEntrega]"
+                          dataType="bool"
+                          name="MarcadoEntrega" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CodigoPostal]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="CodigoPostal" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[LeidoPorPlantaReparacion]"
+                          dataType="bool"
+                          name="LeidoPorPlantaReparacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[LeidoPorPlantaReparacionFecha]"
+                          dataType="dbTimeStamp"
+                          name="LeidoPorPlantaReparacionFecha" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CotizacionReabierta]"
+                          dataType="bool"
+                          name="CotizacionReabierta" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[EsAseguradora]"
+                          dataType="bool"
+                          name="EsAseguradora" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[CodigoVerificacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="CodigoVerificacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaCreacionRegistro]"
+                          dataType="dbTimeStamp"
+                          name="FechaCreacionRegistro" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[PartnerConfirmado]"
+                          dataType="bool"
+                          name="PartnerConfirmado" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[WrittenBy]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="WrittenBy" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[SeguroValidado]"
+                          dataType="bool"
+                          name="SeguroValidado" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaCaptura]"
+                          dataType="dbTimeStamp"
+                          name="FechaCaptura" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[Ruta]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Ruta" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaLimiteRuta]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="FechaLimiteRuta" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[TelefonoEntrega]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="TelefonoEntrega" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[OETipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="OETipoParte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[AltPartNum]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="AltPartNum" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[AltTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="AltTipoParte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[ciecaTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="ciecaTipoParte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[partDescripcion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="partDescripcion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[PrecioListaOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="PrecioListaOnRO" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[PrecioNetoOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="PrecioNetoOnRO" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[NecesitadoParaFecha]"
+                          dataType="dbTimeStamp"
+                          name="NecesitadoParaFecha" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaModificacion]"
+                          dataType="dbTimeStamp"
+                          name="FechaModificacion" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Outputs[Salida de error de destino de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de destino de OLE DB"
+                      synchronousInputId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origen de OLE DB"
+                  name="Origen de OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select 
+	O.ID_Orden, 
+	DO.ID_DetalleOrden,
+	Co.IDCotizacion As ID_Cotizacion,
+	Cod.NumLinea,
+	O.ID_Cliente,
+	O.ID_Ciudad,
+	DO.ID_Parte,
+	S.ID_StatusOrden,
+	A.IDAseguradora As ID_Aseguradora,
+	PR.IDPlantaReparacion As ID_PlantaReparacion,
+	V.VehiculoID,
+	D.ID_Descuento,
+	O.Total_Orden ,
+	DO.Cantidad ,
+	O.Fecha_Orden ,
+	Co.FechaModificacion,
+	Co.[status] As status_cotizacion,
+	Co.TipoDocumento,
+	Co.FechaCreacion,
+	Co.ProcesadoPor,
+	Co.AseguradoraSubsidiaria,
+	Co.NumeroReclamo,
+	Co.OrdenRealizada,
+	Co.CotizacionRealizada,
+	Co.CotizacionDuplicada,
+	Co.procurementFolderID,
+	Co.DireccionEntrega1,
+	Co.DireccionEntrega2,
+	Co.MarcadoEntrega,
+	Co.CodigoPostal,
+	Co.LeidoPorPlantaReparacion,
+	Co.LeidoPorPlantaReparacionFecha,
+	Co.CotizacionReabierta,
+	Co.EsAseguradora,
+	Co.CodigoVerificacion,
+	Co.FechaCreacionRegistro,
+	Co.PartnerConfirmado     ,
+	Co.WrittenBy   ,
+	Co.SeguroValidado      ,
+	Co.FechaCaptura   ,
+	Co.Ruta  ,
+	Co.FechaLimiteRuta   ,
+	Co.TelefonoEntrega ,
+	Cod.OETipoParte ,
+	Cod.AltPartNum   ,
+	Cod.AltTipoParte   ,
+	Cod.ciecaTipoParte   ,
+	Cod.partDescripcion  ,
+	Cod.PrecioListaOnRO ,
+	Cod.PrecioNetoOnRO ,
+	Cod.NecesitadoParaFecha
+from dbo.Orden O
+inner join dbo.Detalle_orden DO on (O.ID_Orden=DO.ID_Orden)
+inner join dbo.Cotizacion Co on (O.ID_Orden = Co.IDOrden )
+inner join dbo.CotizacionDetalle Cod on (Co.IDCotizacion = Cod.IDCotizacion)
+inner join dbo.Aseguradoras A on (Co.IDAseguradora = A.IDAseguradora)
+inner join dbo.PlantaReparacion PR on (Co.IDPlantaReparacion = PR.IDPlantaReparacion)
+inner join dbo.Vehiculo V on(Cod.VehiculoID = V.VehiculoID)
+inner join dbo.Descuento D on (DO.ID_Descuento=D.ID_Descuento)
+inner join dbo.StatusOrden S on (O.ID_StatusOrden=S.ID_StatusOrden)
+where ((Fecha_Orden&gt;?))</property>
+                    <property
+                      dataType="System.String"
+                      description="Variable que contiene el comando SQL para ejecutar."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Asignaciones entre los parámetros del comando SQL y las variables."
+                      name="ParameterMapping">"Parámetro0:Input",{C6F5E494-ACFF-424E-8FE2-B32AC0FC3A4E};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.RepuestosWeb]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.RepuestosWeb]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                      name="Salida de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Orden]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Orden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Orden]"
+                          name="ID_Orden"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_DetalleOrden]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_DetalleOrden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_DetalleOrden]"
+                          name="ID_DetalleOrden"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Cotizacion]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Cotizacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Cotizacion]"
+                          name="ID_Cotizacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NumLinea]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NumLinea]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NumLinea]"
+                          name="NumLinea"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Cliente]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Cliente]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Cliente]"
+                          name="ID_Cliente"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Ciudad]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Ciudad]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Ciudad]"
+                          name="ID_Ciudad"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Parte]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Parte]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Parte]"
+                          name="ID_Parte"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_StatusOrden]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_StatusOrden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_StatusOrden]"
+                          name="ID_StatusOrden"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Aseguradora]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Aseguradora]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Aseguradora]"
+                          name="ID_Aseguradora"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_PlantaReparacion]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_PlantaReparacion]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_PlantaReparacion]"
+                          name="ID_PlantaReparacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[VehiculoID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[VehiculoID]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[VehiculoID]"
+                          name="VehiculoID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Descuento]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Descuento]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID_Descuento]"
+                          name="ID_Descuento"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Total_Orden]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Total_Orden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Total_Orden]"
+                          name="Total_Orden"
+                          precision="12"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cantidad]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cantidad]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cantidad]"
+                          name="Cantidad"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha_Orden]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha_Orden]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha_Orden]"
+                          name="Fecha_Orden"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaModificacion]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaModificacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaModificacion]"
+                          name="FechaModificacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[status_cotizacion]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[status_cotizacion]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[status_cotizacion]"
+                          name="status_cotizacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TipoDocumento]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TipoDocumento]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TipoDocumento]"
+                          name="TipoDocumento"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCreacion]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaCreacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCreacion]"
+                          name="FechaCreacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ProcesadoPor]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ProcesadoPor]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ProcesadoPor]"
+                          name="ProcesadoPor"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AseguradoraSubsidiaria]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[AseguradoraSubsidiaria]"
+                          length="80"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AseguradoraSubsidiaria]"
+                          name="AseguradoraSubsidiaria"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NumeroReclamo]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NumeroReclamo]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NumeroReclamo]"
+                          name="NumeroReclamo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[OrdenRealizada]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[OrdenRealizada]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[OrdenRealizada]"
+                          name="OrdenRealizada"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionRealizada]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CotizacionRealizada]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionRealizada]"
+                          name="CotizacionRealizada"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionDuplicada]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CotizacionDuplicada]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionDuplicada]"
+                          name="CotizacionDuplicada"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[procurementFolderID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[procurementFolderID]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[procurementFolderID]"
+                          name="procurementFolderID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[DireccionEntrega1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[DireccionEntrega1]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[DireccionEntrega1]"
+                          name="DireccionEntrega1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[DireccionEntrega2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[DireccionEntrega2]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[DireccionEntrega2]"
+                          name="DireccionEntrega2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[MarcadoEntrega]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[MarcadoEntrega]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[MarcadoEntrega]"
+                          name="MarcadoEntrega"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CodigoPostal]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CodigoPostal]"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CodigoPostal]"
+                          name="CodigoPostal"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[LeidoPorPlantaReparacion]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[LeidoPorPlantaReparacion]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[LeidoPorPlantaReparacion]"
+                          name="LeidoPorPlantaReparacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[LeidoPorPlantaReparacionFecha]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[LeidoPorPlantaReparacionFecha]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[LeidoPorPlantaReparacionFecha]"
+                          name="LeidoPorPlantaReparacionFecha"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionReabierta]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CotizacionReabierta]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CotizacionReabierta]"
+                          name="CotizacionReabierta"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EsAseguradora]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[EsAseguradora]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EsAseguradora]"
+                          name="EsAseguradora"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CodigoVerificacion]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CodigoVerificacion]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CodigoVerificacion]"
+                          name="CodigoVerificacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCreacionRegistro]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaCreacionRegistro]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCreacionRegistro]"
+                          name="FechaCreacionRegistro"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PartnerConfirmado]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PartnerConfirmado]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PartnerConfirmado]"
+                          name="PartnerConfirmado"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[WrittenBy]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[WrittenBy]"
+                          length="80"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[WrittenBy]"
+                          name="WrittenBy"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[SeguroValidado]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[SeguroValidado]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[SeguroValidado]"
+                          name="SeguroValidado"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCaptura]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaCaptura]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaCaptura]"
+                          name="FechaCaptura"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Ruta]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Ruta]"
+                          length="500"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Ruta]"
+                          name="Ruta"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaLimiteRuta]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaLimiteRuta]"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaLimiteRuta]"
+                          name="FechaLimiteRuta"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TelefonoEntrega]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TelefonoEntrega]"
+                          length="15"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TelefonoEntrega]"
+                          name="TelefonoEntrega"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[OETipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[OETipoParte]"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[OETipoParte]"
+                          name="OETipoParte"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AltPartNum]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[AltPartNum]"
+                          length="45"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AltPartNum]"
+                          name="AltPartNum"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AltTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[AltTipoParte]"
+                          length="45"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[AltTipoParte]"
+                          name="AltTipoParte"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ciecaTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ciecaTipoParte]"
+                          length="45"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ciecaTipoParte]"
+                          name="ciecaTipoParte"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[partDescripcion]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[partDescripcion]"
+                          length="255"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[partDescripcion]"
+                          name="partDescripcion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PrecioListaOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PrecioListaOnRO]"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PrecioListaOnRO]"
+                          name="PrecioListaOnRO"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PrecioNetoOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PrecioNetoOnRO]"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PrecioNetoOnRO]"
+                          name="PrecioNetoOnRO"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NecesitadoParaFecha]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NecesitadoParaFecha]"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NecesitadoParaFecha]"
+                          name="NecesitadoParaFecha"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Orden]"
+                          dataType="i4"
+                          name="ID_Orden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_DetalleOrden]"
+                          dataType="i4"
+                          name="ID_DetalleOrden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Cotizacion]"
+                          dataType="i4"
+                          name="ID_Cotizacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NumLinea]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="NumLinea" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Cliente]"
+                          dataType="i4"
+                          name="ID_Cliente" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Ciudad]"
+                          dataType="i4"
+                          name="ID_Ciudad" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Parte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ID_Parte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_StatusOrden]"
+                          dataType="i4"
+                          name="ID_StatusOrden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Aseguradora]"
+                          dataType="i4"
+                          name="ID_Aseguradora" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_PlantaReparacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ID_PlantaReparacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[VehiculoID]"
+                          dataType="i4"
+                          name="VehiculoID" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID_Descuento]"
+                          dataType="i4"
+                          name="ID_Descuento" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Total_Orden]"
+                          dataType="numeric"
+                          name="Total_Orden"
+                          precision="12"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cantidad]"
+                          dataType="i4"
+                          name="Cantidad" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha_Orden]"
+                          dataType="dbTimeStamp"
+                          name="Fecha_Orden" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaModificacion]"
+                          dataType="dbTimeStamp"
+                          name="FechaModificacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[status_cotizacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="status_cotizacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TipoDocumento]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="TipoDocumento" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaCreacion]"
+                          dataType="dbTimeStamp"
+                          name="FechaCreacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ProcesadoPor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ProcesadoPor" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[AseguradoraSubsidiaria]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="AseguradoraSubsidiaria" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NumeroReclamo]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="NumeroReclamo" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[OrdenRealizada]"
+                          dataType="bool"
+                          name="OrdenRealizada" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CotizacionRealizada]"
+                          dataType="bool"
+                          name="CotizacionRealizada" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CotizacionDuplicada]"
+                          dataType="bool"
+                          name="CotizacionDuplicada" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[procurementFolderID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="procurementFolderID" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[DireccionEntrega1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="DireccionEntrega1" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[DireccionEntrega2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="DireccionEntrega2" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[MarcadoEntrega]"
+                          dataType="bool"
+                          name="MarcadoEntrega" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CodigoPostal]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CodigoPostal" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[LeidoPorPlantaReparacion]"
+                          dataType="bool"
+                          name="LeidoPorPlantaReparacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[LeidoPorPlantaReparacionFecha]"
+                          dataType="dbTimeStamp"
+                          name="LeidoPorPlantaReparacionFecha" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CotizacionReabierta]"
+                          dataType="bool"
+                          name="CotizacionReabierta" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[EsAseguradora]"
+                          dataType="bool"
+                          name="EsAseguradora" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CodigoVerificacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CodigoVerificacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaCreacionRegistro]"
+                          dataType="dbTimeStamp"
+                          name="FechaCreacionRegistro" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PartnerConfirmado]"
+                          dataType="bool"
+                          name="PartnerConfirmado" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[WrittenBy]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="WrittenBy" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[SeguroValidado]"
+                          dataType="bool"
+                          name="SeguroValidado" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaCaptura]"
+                          dataType="dbTimeStamp"
+                          name="FechaCaptura" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Ruta]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Ruta" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaLimiteRuta]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="FechaLimiteRuta" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TelefonoEntrega]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="TelefonoEntrega" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[OETipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="OETipoParte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[AltPartNum]"
+                          codePage="1252"
+                          dataType="str"
+                          length="45"
+                          name="AltPartNum" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[AltTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="45"
+                          name="AltTipoParte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ciecaTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="45"
+                          name="ciecaTipoParte" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[partDescripcion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="partDescripcion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PrecioListaOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="PrecioListaOnRO" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PrecioNetoOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="PrecioNetoOnRO" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NecesitadoParaFecha]"
+                          dataType="dbTimeStamp"
+                          name="NecesitadoParaFecha" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                      isErrorOut="true"
+                      name="Salida de error de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Orden]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Orden]"
+                          name="ID_Orden" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_DetalleOrden]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_DetalleOrden]"
+                          name="ID_DetalleOrden" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Cotizacion]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Cotizacion]"
+                          name="ID_Cotizacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NumLinea]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NumLinea]"
+                          name="NumLinea" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Cliente]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Cliente]"
+                          name="ID_Cliente" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Ciudad]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Ciudad]"
+                          name="ID_Ciudad" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Parte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Parte]"
+                          name="ID_Parte" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_StatusOrden]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_StatusOrden]"
+                          name="ID_StatusOrden" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Aseguradora]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Aseguradora]"
+                          name="ID_Aseguradora" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_PlantaReparacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_PlantaReparacion]"
+                          name="ID_PlantaReparacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[VehiculoID]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[VehiculoID]"
+                          name="VehiculoID" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Descuento]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID_Descuento]"
+                          name="ID_Descuento" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Total_Orden]"
+                          dataType="numeric"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Total_Orden]"
+                          name="Total_Orden"
+                          precision="12"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cantidad]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cantidad]"
+                          name="Cantidad" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha_Orden]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha_Orden]"
+                          name="Fecha_Orden" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaModificacion]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaModificacion]"
+                          name="FechaModificacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[status_cotizacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[status_cotizacion]"
+                          name="status_cotizacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TipoDocumento]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TipoDocumento]"
+                          name="TipoDocumento" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaCreacion]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaCreacion]"
+                          name="FechaCreacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ProcesadoPor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ProcesadoPor]"
+                          name="ProcesadoPor" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[AseguradoraSubsidiaria]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[AseguradoraSubsidiaria]"
+                          name="AseguradoraSubsidiaria" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NumeroReclamo]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NumeroReclamo]"
+                          name="NumeroReclamo" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[OrdenRealizada]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[OrdenRealizada]"
+                          name="OrdenRealizada" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CotizacionRealizada]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CotizacionRealizada]"
+                          name="CotizacionRealizada" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CotizacionDuplicada]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CotizacionDuplicada]"
+                          name="CotizacionDuplicada" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[procurementFolderID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[procurementFolderID]"
+                          name="procurementFolderID" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[DireccionEntrega1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[DireccionEntrega1]"
+                          name="DireccionEntrega1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[DireccionEntrega2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[DireccionEntrega2]"
+                          name="DireccionEntrega2" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[MarcadoEntrega]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[MarcadoEntrega]"
+                          name="MarcadoEntrega" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CodigoPostal]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CodigoPostal]"
+                          name="CodigoPostal" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[LeidoPorPlantaReparacion]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[LeidoPorPlantaReparacion]"
+                          name="LeidoPorPlantaReparacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[LeidoPorPlantaReparacionFecha]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[LeidoPorPlantaReparacionFecha]"
+                          name="LeidoPorPlantaReparacionFecha" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CotizacionReabierta]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CotizacionReabierta]"
+                          name="CotizacionReabierta" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[EsAseguradora]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[EsAseguradora]"
+                          name="EsAseguradora" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CodigoVerificacion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CodigoVerificacion]"
+                          name="CodigoVerificacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaCreacionRegistro]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaCreacionRegistro]"
+                          name="FechaCreacionRegistro" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PartnerConfirmado]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PartnerConfirmado]"
+                          name="PartnerConfirmado" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[WrittenBy]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[WrittenBy]"
+                          name="WrittenBy" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[SeguroValidado]"
+                          dataType="bool"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[SeguroValidado]"
+                          name="SeguroValidado" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaCaptura]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaCaptura]"
+                          name="FechaCaptura" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Ruta]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Ruta]"
+                          name="Ruta" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaLimiteRuta]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaLimiteRuta]"
+                          name="FechaLimiteRuta" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TelefonoEntrega]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TelefonoEntrega]"
+                          name="TelefonoEntrega" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[OETipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[OETipoParte]"
+                          name="OETipoParte" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[AltPartNum]"
+                          codePage="1252"
+                          dataType="str"
+                          length="45"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[AltPartNum]"
+                          name="AltPartNum" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[AltTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="45"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[AltTipoParte]"
+                          name="AltTipoParte" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ciecaTipoParte]"
+                          codePage="1252"
+                          dataType="str"
+                          length="45"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ciecaTipoParte]"
+                          name="ciecaTipoParte" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[partDescripcion]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[partDescripcion]"
+                          name="partDescripcion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PrecioListaOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PrecioListaOnRO]"
+                          name="PrecioListaOnRO" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PrecioNetoOnRO]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PrecioNetoOnRO]"
+                          name="PrecioNetoOnRO" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NecesitadoParaFecha]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NecesitadoParaFecha]"
+                          name="NecesitadoParaFecha" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Contenedor de secuencias\Cargar a Staging.Paths[Salida de origen de OLE DB]"
+                  endId="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden.Inputs[Entrada de destino de OLE DB]"
+                  name="Salida de origen de OLE DB"
+                  startId="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Contenedor de secuencias\Limpiar Staging"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Tarea Ejecutar SQL"
@@ -39,10 +2029,56 @@
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
-            <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9C988F4C-41BA-413E-BDDE-0EF76EB796D8}"
+              SQLTask:SqlStatementSource="truncate table staging.Orden" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Ultima Fecha de Ejecucion"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{E5B6201B-201C-4907-8188-84253F105D95}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Ultima Fecha de Ejecucion"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9C988F4C-41BA-413E-BDDE-0EF76EB796D8}"
+              SQLTask:SqlStatementSource="SELECT ISNULL(MAX(FechaEjecucion),'1900-01-01') AS UltimaFecha&#xA;FROM FactLog"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción]"
+          DTS:CreationName=""
+          DTS:DTSID="{07163589-E930-43A4-AA05-E04043509FB0}"
+          DTS:From="Package\Contenedor de secuencias\Limpiar Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción"
+          DTS:To="Package\Contenedor de secuencias\Ultima Fecha de Ejecucion" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{23BD56E8-9CF7-4CE8-8DEF-59DFF9536779}"
+          DTS:From="Package\Contenedor de secuencias\Ultima Fecha de Ejecucion"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 1"
+          DTS:To="Package\Contenedor de secuencias\Cargar a Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{09CACDCB-4C8B-40A2-9442-430C1EA91B39}"
+          DTS:From="Package\Contenedor de secuencias\Cargar a Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 2"
+          DTS:To="Package\Contenedor de secuencias\Actualizar Fact" />
+      </DTS:PrecedenceConstraints>
     </DTS:Executable>
   </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
@@ -56,20 +2092,157 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Contenedor de secuencias\Actualizar Fact"
+          TopLeft="169,298" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Contenedor de secuencias\Cargar a Staging"
+          TopLeft="156,212" />
         <NodeLayout
           Size="152,42"
           Id="Package\Contenedor de secuencias\Limpiar Staging"
           TopLeft="158,29" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Contenedor de secuencias\Ultima Fecha de Ejecucion"
+          TopLeft="140,129" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción]"
+          TopLeft="237.75,71">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 1]"
+          TopLeft="238.25,171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 2]"
+          TopLeft="238.75,254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="460,362"
-          Size="460,405"
+          PanelSize="460,395"
+          Size="460,438"
           Id="Package\Contenedor de secuencias"
           TopLeft="220,61" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <TaskHost
+    design-time-name="Package\Contenedor de secuencias\Cargar a Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB"
+          TopLeft="327,162" />
+        <NodeLayout
+          Size="190,47"
+          Id="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden"
+          TopLeft="311,283" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias\Cargar a Staging.Paths[Salida de origen de OLE DB]"
+          TopLeft="407.5,204">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79"
+              Start="0,0"
+              End="0,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Contenedor de secuencias\Cargar a Staging\Cargar a Staging Orden">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Contenedor de secuencias\Cargar a Staging\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
