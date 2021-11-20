@@ -1,6 +1,6 @@
 Use RepuestosWeb
 --Categoria CON CANDIDAD DE STATUS POR ORDEN
-select cat.Nombre as NombreCategoria, 
+select cat.Nombre as Nombre_Categoria, 
 SUM(CASE WHEN SO.ID_StatusOrden = 1 THEN 1 ELSE 0 END) as Procesado,
 SUM(CASE WHEN SO.ID_StatusOrden = 2 THEN 1 ELSE 0 END) as Cancelado,
 SUM(CASE WHEN SO.ID_StatusOrden = 3 THEN 1 ELSE 0 END) as Recibido,
@@ -16,7 +16,7 @@ group by cat.Nombre
 GO
 
 --Categoria CON TOTAL DE PARTES VENDIDAS
-select cat.Nombre as NombreCategoria, sum(Do.cantidad) as Cantidad
+select cat.Nombre as Nombre_Categoria, sum(Do.cantidad) as Cantidad
 from Orden O INNER JOIN Detalle_orden DO on(DO.ID_Orden=O.ID_Orden)
 						INNER JOIN Partes P on (P.ID_Parte=DO.ID_Parte)
 						INNER JOIN Categoria Cat on (p.ID_Categoria = cat.ID_Categoria)
@@ -24,7 +24,7 @@ from Orden O INNER JOIN Detalle_orden DO on(DO.ID_Orden=O.ID_Orden)
 GO
 
 --Categoria CON CANTIDAD DE DESCUENTOS APLLICADOS
-select cat.Nombre as NombreCategoria, 
+select cat.Nombre as Nombre_Categoria, 
 SUM(CASE WHEN De.ID_Descuento = 1 THEN 1 ELSE 0 END) as PromocionTrupebistor,
 SUM(CASE WHEN De.ID_Descuento = 2 THEN 1 ELSE 0 END) as PromocionQwicador,
 SUM(CASE WHEN De.ID_Descuento = 3 THEN 1 ELSE 0 END) as PromocionThrunipaquar,
@@ -59,7 +59,7 @@ group by cat.Nombre
 GO
 
 --Categoria POR CANTIDAD DE GENERO
-select cat.Nombre as NombreCategoria, 
+select cat.Nombre as Nombre_Categoria, 
 SUM(CASE WHEN Cli.Genero = 'M' THEN 1 ELSE 0 END) as M,
 SUM(CASE WHEN Cli.Genero = 'F' THEN 1 ELSE 0 END) as F
 from Orden O INNER JOIN
@@ -71,7 +71,7 @@ group by cat.Nombre
 GO
 
 --Categoria CON TOTAL DE PARTES VENDIDAS Y GENERO DEL CLIENTE
-select cat.Nombre as NombreCategoria, sum(Do.cantidad) as CantidadTotal, 
+select cat.Nombre as Nombre_Categoria, sum(Do.cantidad) as CantidadTotal, 
 sum(CASE WHEN Cli.Genero = 'M' THEN DO.Cantidad ELSE 0 END) as CantidadGeneroM,
 sum(CASE WHEN Cli.Genero = 'F' THEN DO.Cantidad ELSE 0 END) as CantidadGeneroF
 from Orden O INNER JOIN Detalle_orden DO on(DO.ID_Orden=O.ID_Orden)
@@ -82,7 +82,7 @@ from Orden O INNER JOIN Detalle_orden DO on(DO.ID_Orden=O.ID_Orden)
 GO
 
 --Categoria CON PAIS
-select cat.Nombre as NombreCategoria, 
+select cat.Nombre as Nombre_Categoria, 
 SUM(CASE WHEN p.ID_Pais = 1 THEN 1 ELSE 0 END) as Jamaica,
 SUM(CASE WHEN p.ID_Pais = 2 THEN 1 ELSE 0 END) as Panama,
 SUM(CASE WHEN p.ID_Pais = 3 THEN 1 ELSE 0 END) as Brasil,
@@ -109,7 +109,7 @@ group by cat.Nombre
 GO
 
 --Categoria CON CANDIDAD DE STATUS POR COTIZACION
-select cat.Nombre as NombreCategoria, 
+select cat.Nombre as Nombre_Categoria, 
 SUM(CASE WHEN co.status = 'Quote' THEN 1 ELSE 0 END) as Quote,
 SUM(CASE WHEN co.status = 'Order' THEN 1 ELSE 0 END) as 'Order'
 from Cotizacion co INNER JOIN
@@ -120,7 +120,7 @@ group by cat.Nombre
 GO
 
 --Categoria CON CANDIDAD DE PROCESADOPOR POR COTIZACION
-select cat.Nombre as NombreCategoria, 
+select cat.Nombre as Nombre_Categoria, 
 SUM(CASE WHEN co.ProcesadoPor = 'Servicio de Integracion' THEN 1 ELSE 0 END) as ServiciodeIntegracion,
 SUM(CASE WHEN co.ProcesadoPor = 'Aseguradora' THEN 1 ELSE 0 END) as Aseguradora,
 SUM(CASE WHEN co.ProcesadoPor = 'Planta de Reparacion' THEN 1 ELSE 0 END) as PlantadeReparacion,
@@ -134,7 +134,7 @@ group by cat.Nombre
 GO
 
 --Categoria CON CANTIDAD DE ORDENENES REALIZADAS POR COTIZACION
-select cat.Nombre as NombreCategoria, 
+select cat.Nombre as Nombre_Categoria, 
 SUM(CASE WHEN co.OrdenRealizada = 0 THEN 1 ELSE 0 END) as OrdenNoRealizada,
 SUM(CASE WHEN co.OrdenRealizada = 1 THEN 1 ELSE 0 END) as OrdenRealizada
 from Cotizacion co INNER JOIN
@@ -145,7 +145,7 @@ group by cat.Nombre
 GO
 
 --Categoria CON CANTIDAD DE PARTES COTIZADAS POR COTIZACION
-select cat.Nombre as NombreCategoria, SUM(cod.Cantidad) as Cantidad
+select cat.Nombre as Nombre_Categoria, SUM(cod.Cantidad) as Cantidad
 from Cotizacion co INNER JOIN
 CotizacionDetalle cod on cod.IDCotizacion = co.IDCotizacion INNER JOIN
 Partes P on P.ID_Parte = cod.ID_Parte INNER JOIN
