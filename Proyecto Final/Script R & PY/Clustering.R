@@ -27,6 +27,7 @@ Status_Orden <- dbGetQuery(conn = Repuestosweb,"select cat.Nombre as Nombre_Cate
                                       group by cat.Nombre")
 rownames(Status_Orden) <- Status_Orden$Nombre_Categoria
 Status_Orden$Nombre_Categoria <- NULL
+
 Status_Cotizacion <- dbGetQuery(conn = Repuestosweb, "select cat.Nombre as Nombre_Categoria, 
                                             SUM(CASE WHEN co.status = 'Quote' THEN 1 ELSE 0 END) as StatusQuote,
                                             SUM(CASE WHEN co.status = 'Order' THEN 1 ELSE 0 END) as StatusOrder
