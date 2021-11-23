@@ -141,76 +141,14 @@ DescuentoRaw <- Descuento_Aplicado
 
 DStats <- merge(DescuentoCluster, DescuentoRaw, by=0, all=TRUE)
 
-N(DStats)[2]<-"clustno"
-DStats <- subset(DStats, select =-c(Row.N))
+
+names(DStats)[2]<-"clustno"
+DStats <- subset(DStats, select =-c(Row.names))
 
 DStats <- aggregate(DStats, by=list(DStats$clustno), FUN = mean)
 
 fviz_cluster(clusterk4descuento, data = Descuento, labelsize = 0, pointsize = 0)
 
-#Cantidad de genero
-Genero <- dbGetQuery(con = con,
-                       "select cat.Nombre as NombreCategoria, 
-SUM(CASE WHEN Cli.Genero = 'M' THEN 1 ELSE 0 END) as M,
-SUM(CASE WHEN Cli.Genero = 'F' THEN 1 ELSE 0 END) as F
-from Orden O inner join
-Detalle_orden DO on DO.ID_Orden = O.ID_Orden inner join
-Partes P on P.ID_Parte = DO.ID_Parte INNER JOIN
-Categoria cat on Cat.ID_Categoria = p.ID_Categoria inner join
-Clientes Cli on O.ID_Cliente = Cli.ID_Cliente
-group by cat.Nombre"
-)
-
-rownames(Genero) <- Genero$NombreCategoria
-Genero$NombreCategoria <- NULL
-##########################################
-genero <- scale(Genero)
-genero <- na.omit(genero)
-
-clusterk2genero <- kmeans(genero, 2, nstart = 25)
-clusterk3genero <- kmeans(genero, 3, nstart = 25)
-clusterk4genero <- kmeans(genero, 4, nstart = 25)
-clusterk5genero <- kmeans(genero, 5, nstart = 25)
-clusterk6genero <- kmeans(genero, 6, nstart = 25)
-clusterk7genero <- kmeans(genero, 7, nstart = 25)
-
-grafica1genero <- fviz_cluster(clusterk2genero, geom = "point", data = genero) + ggtitle("k2")
-grafica2genero <- fviz_cluster(clusterk3genero, geom = "point", data = genero) + ggtitle("k3")
-grafica3genero <- fviz_cluster(clusterk4genero, geom = "point", data = genero) + ggtitle("k4")
-grafica4genero <- fviz_cluster(clusterk5genero, geom = "point", data = genero) + ggtitle("k5")
-grafica5genero <- fviz_cluster(clusterk6genero, geom = "point", data = genero) + ggtitle("k6")
-grafica6genero <- fviz_cluster(clusterk7genero, geom = "point", data = genero) + ggtitle("k7")
-
-grid.arrange(grafica1genero,
-             grafica2genero,
-             grafica3genero,
-             grafica4genero,
-             grafica5genero,
-             grafica6genero, nrow = 2)
-
-fviz_nbclust(genero, kmeans, method = "wss") +
-  geom_vline(xintercept = 3, linetype = 2)
-
-GeneroCluster <- as.data.frame(clusterk3genero$cluster)
-GeneroRaw <- Genero
-
-GStats <- merge(GeneroCluster, GeneroRaw, by=0, all=TRUE)
-
-names(GStats)[2]<-"clustno"
-GStats <- subset(GStats, select =-c(Row.names))
-
-GStats <- aggregate(GStats, by=list(GStats$clustno), FUN = mean)
-
-fviz_cluster(clusterk3genero, data = genero, labelsize = 0, pointsize = 0)
-
-ggplot(GStats, aes(x="",y=M, fill=clustno)) +
-  geom_bar(stat="identity", width = 1)+
-  coord_polar("y", start = 0)
-
-ggplot(GStats, aes(x="",y=F, fill=clustno)) +
-  geom_bar(stat="identity", width = 1)+
-  coord_polar("y", start = 0)
- 
 #Cantidad de cotizaciones
 Cotizaciones <- dbGetQuery(con = con,
                                        "select cat.Nombre as NombreCategoria, 
