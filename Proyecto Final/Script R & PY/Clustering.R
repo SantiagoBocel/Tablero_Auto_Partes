@@ -8,7 +8,7 @@ library(odbc)
 #Conexion a base de datos
 con <- dbConnect(odbc(),
                  Driver = "SQL Server",
-                 Server = "LAPTOP-0I4EFM0E",
+                 Server = "LAPTOP-5N5FACOT",
                  Database = "RepuestosWeb",
                  timeout = 8000)
 
